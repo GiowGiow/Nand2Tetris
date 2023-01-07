@@ -3,9 +3,9 @@ from typing import Tuple
 from assembler_constants import (
     BIN_CODES,
     COMP_PATTERN_TO_BITS,
-    COMP_PATTERN_TO_aBIT,
     DESTINATION_PATTERN_TO_BITS,
     JUMP_PATTERN_TO_BITS,
+    COMP_PATTERN_TO_aBIT,
 )
 
 
@@ -14,12 +14,15 @@ def generate_C_instruction_in_binary(assembly_line: str) -> str:
 
     # 'chooses' if the operation is carried with the contents of the
     # A Register of M register
-    a_bit = COMP_PATTERN_TO_aBIT[compute] 
+    a_bit = COMP_PATTERN_TO_aBIT[compute]
     computation_bits = COMP_PATTERN_TO_BITS[compute]
     destination_bits = DESTINATION_PATTERN_TO_BITS[destination]
     jump_bits = JUMP_PATTERN_TO_BITS[jump]
 
-    C_instruction = f"{BIN_CODES['C_INSTRUCTION']}{BIN_CODES['C_INSTRUCTION_UNUSED_BITS']}{a_bit}{computation_bits}{destination_bits}{jump_bits}"
+    C_instruction = (
+        f"{BIN_CODES['C_INSTRUCTION']}{BIN_CODES['C_INSTRUCTION_UNUSED_BITS']}"
+        f"{a_bit}{computation_bits}{destination_bits}{jump_bits}"
+    )
     return C_instruction
 
 

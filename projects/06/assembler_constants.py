@@ -1,4 +1,3 @@
-from enum import Enum
 import re
 
 COMMON_REGISTERS = 16
@@ -14,27 +13,29 @@ SPECIAL_SYMBOL_ADDRESS = {
 }
 
 PATTERNS = {
-    "A_INSTRUCTION": "^@(.+)",
-    "SPECIAL_REG": "^R(\d+)",
-    "TYPE_LABEL": "^\((.+)\)",
-    "SP": "^SP$",
-    "LCL": "^LCL$",
-    "ARG": "^ARG$",
-    "THIS": "^THIS$",
-    "THAT": "^THAT$",
-    "SCREEN": "^SCREEN$",
-    "KBD": "^KBD$",
+    "A_INSTRUCTION": r"^@(.+)",
+    "SPECIAL_REG": r"^R(\d+)",
+    "TYPE_LABEL": r"^\((.+)\)",
+    "SP": r"^SP$",
+    "LCL": r"^LCL$",
+    "ARG": r"^ARG$",
+    "THIS": r"^THIS$",
+    "THAT": r"^THAT$",
+    "SCREEN": r"^SCREEN$",
+    "KBD": r"^KBD$",
 }
 
-SPECIAL_SYMBOL_PATTERN = re.compile("{}|{}|{}|{}|{}|{}|{}".format(
-            PATTERNS["SP"],
-            PATTERNS["LCL"],
-            PATTERNS["ARG"],
-            PATTERNS["THIS"],
-            PATTERNS["THAT"],
-            PATTERNS["SCREEN"],
-            PATTERNS["KBD"],
-        ))
+SPECIAL_SYMBOL_PATTERN = re.compile(
+    "{}|{}|{}|{}|{}|{}|{}".format(
+        PATTERNS["SP"],
+        PATTERNS["LCL"],
+        PATTERNS["ARG"],
+        PATTERNS["THIS"],
+        PATTERNS["THAT"],
+        PATTERNS["SCREEN"],
+        PATTERNS["KBD"],
+    )
+)
 
 BIN_CODES = {
     "A_INSTRUCTION": "0",

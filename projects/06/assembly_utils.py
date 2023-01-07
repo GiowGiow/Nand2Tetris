@@ -1,17 +1,17 @@
-from typing import Dict, List, Set, Tuple
-from pathlib import Path
 import argparse
+from pathlib import Path
+from typing import Dict, List, Set, TextIO, Tuple
 
 from a_instruction import (
-    is_numeric_address,
-    is_label,
-    is_special_register,
     is_A_instruction,
+    is_label,
+    is_numeric_address,
+    is_special_register,
     is_special_symbol,
 )
 
 
-def write_to_output(file_name, bin_code):
+def write_to_output(file_name: str, bin_code: List[str]) -> None:
     hack_file_name = Path(file_name).with_suffix(".hack")
     print(f"Output file: {hack_file_name}")
     with open(hack_file_name, "w") as f:
@@ -19,7 +19,7 @@ def write_to_output(file_name, bin_code):
         f.write("\n")
 
 
-def parse_asm_file_from_argument():
+def parse_asm_file_from_argument() -> str:
     parser = argparse.ArgumentParser(
         prog="Hack Assembler",
         description="Converts Hack assembly code into binary form",
@@ -32,7 +32,7 @@ def parse_asm_file_from_argument():
     return file_name
 
 
-def read_assembly_file(f) -> List[str]:
+def read_assembly_file(f: TextIO) -> List[str]:
     """Ignore commented and empty lines in the string lines read
     from the assembly file"""
     file_lines = []
@@ -77,7 +77,7 @@ def get_labels_and_variables(
     return labels_set, var_to_index, label_to_index
 
 
-def calculate_label_offset(labels: List[str], index: int) -> int:
+def calculate_label_offset(labels: List, index: int) -> int:
     """Calculate label - offset of deleted labels"""
     return index - (len(labels) - 1)
 

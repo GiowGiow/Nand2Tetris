@@ -1,12 +1,13 @@
-from c_instruction import generate_C_instruction_in_binary
-from a_instruction import is_label, is_A_instruction, generate_A_instruction_in_binary
+from typing import Dict, List, Set
+
+from a_instruction import generate_A_instruction_in_binary, is_A_instruction, is_label
 from assembly_utils import (
+    get_labels_and_variables,
     parse_asm_file_from_argument,
     read_assembly_file,
-    get_labels_and_variables,
     write_to_output,
 )
-from typing import Dict, List, Set
+from c_instruction import generate_C_instruction_in_binary
 
 
 def convert_to_binary(

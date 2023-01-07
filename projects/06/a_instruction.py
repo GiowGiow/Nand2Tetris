@@ -1,12 +1,13 @@
 import re
+from typing import Dict, Literal, Set, Union
+
 from assembler_constants import (
-    COMMON_REGISTERS,
-    SPECIAL_SYMBOL_PATTERN,
-    SPECIAL_SYMBOL_ADDRESS,
-    PATTERNS,
     BIN_CODES,
+    COMMON_REGISTERS,
+    PATTERNS,
+    SPECIAL_SYMBOL_ADDRESS,
+    SPECIAL_SYMBOL_PATTERN,
 )
-from typing import Dict, Set, Union
 
 
 def generate_A_instruction_in_binary(
@@ -41,11 +42,11 @@ def convert_int_to_15_bit_bin_str(number: int) -> str:
     return "{0:015b}".format(number)
 
 
-def is_numeric_address(address) -> bool:
+def is_numeric_address(address: str) -> bool:
     return address.isnumeric()
 
 
-def is_label(line) -> Union[str, bool]:
+def is_label(line: str) -> Union[str, Literal[False]]:
     match = re.match(PATTERNS["TYPE_LABEL"], line)
     if match:
         return match.group(1)
@@ -53,7 +54,7 @@ def is_label(line) -> Union[str, bool]:
         return False
 
 
-def is_special_register(address) -> Union[str, bool]:
+def is_special_register(address: str) -> Union[str, Literal[False]]:
     match = re.match(PATTERNS["SPECIAL_REG"], address)
     if match:
         return match.group(1)
@@ -61,7 +62,7 @@ def is_special_register(address) -> Union[str, bool]:
         return False
 
 
-def is_A_instruction(command) -> Union[str, bool]:
+def is_A_instruction(command: str) -> Union[str, Literal[False]]:
     match = re.match(PATTERNS["A_INSTRUCTION"], command)
     if match:
         return match.group(1)
@@ -69,10 +70,8 @@ def is_A_instruction(command) -> Union[str, bool]:
         return False
 
 
-def is_special_symbol(address) -> Union[str, bool]:
-    match = SPECIAL_SYMBOL_PATTERN.match(
-        address
-    )
+def is_special_symbol(address: str) -> Union[str, Literal[False]]:
+    match = SPECIAL_SYMBOL_PATTERN.match(address)
     if match:
         return match.group(0)
     else:
