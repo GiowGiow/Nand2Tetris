@@ -1,3 +1,4 @@
+"""This module contains the constants and patterns used throughout the code."""
 import re
 
 COMMON_REGISTERS = 16
@@ -15,7 +16,7 @@ SPECIAL_SYMBOL_ADDRESS = {
 PATTERNS = {
     "A_INSTRUCTION": r"^@(.+)",
     "SPECIAL_REG": r"^R(\d+)",
-    "TYPE_LABEL": r"^\((.+)\)",
+    "LABEL": r"^\((.+)\)",
     "SP": r"^SP$",
     "LCL": r"^LCL$",
     "ARG": r"^ARG$",

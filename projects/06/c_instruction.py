@@ -1,3 +1,5 @@
+"""Module for generating binary code for C instructions."""
+
 from typing import Tuple
 
 from assembler_constants import (
@@ -10,6 +12,7 @@ from assembler_constants import (
 
 
 def generate_C_instruction_in_binary(assembly_line: str) -> str:
+    """Translate a C instruction in Hack assembly into binary."""
     destination, compute, jump = tokenize_C_instruction(assembly_line)
 
     # 'chooses' if the operation is carried with the contents of the
@@ -27,10 +30,13 @@ def generate_C_instruction_in_binary(assembly_line: str) -> str:
 
 
 def tokenize_C_instruction(assembly_line: str) -> Tuple[str, str, str]:
-    """
-    Symbolic syntax: dest = comp ; jump comp is mandatory.
-    If dest is empty, the = is omitted;
-    If jump is empty, the ; is omitted
+    """Tokenizes a C instruction into its destination, compute and jump parts.
+
+    Description of the C instruction syntax:
+
+    Symbolic syntax: "dest = comp ;" jump comp is mandatory.
+    If "dest" is empty, the "=" is omitted;
+    If "jump" is empty, the ";" is omitted
 
     Binary syntax: 1 1 1 a c c c c c c d d d j j j
     C instruction  _
@@ -38,8 +44,13 @@ def tokenize_C_instruction(assembly_line: str) -> Tuple[str, str, str]:
     comp bits            _____________
     dest bits                          _____
     jump bits                                _____
-    """
 
+    Args:
+        assembly_line (str): C instruction in assembly
+
+    Returns:
+        Tuple[str, str, str]: destination, compute and jump parts of the C instruction
+    """
     destination_bits = ""
     compute_bits = ""
     jump_bits = ""

@@ -1,3 +1,4 @@
+"""Hack assembler main script."""
 from typing import Dict, List, Set
 
 from a_instruction import generate_A_instruction_in_binary, is_A_instruction, is_label
@@ -16,7 +17,17 @@ def convert_to_binary(
     label_to_index: Dict[str, int],
     var_to_index: Dict[str, int],
 ) -> List[str]:
-    """Translate from Hack assembly code to binary"""
+    """Translate from Hack assembly code to binary.
+
+    Args:
+        assembly_lines (List[str]): List of assembly lines read from file
+        labels (Set[str]): Set of labels read from the assembly code
+        label_to_index (Dict[str, int]): Map of a label to its corresponding already offset index
+        var_to_index (Dict[str, int]): Map of the variables to their corresponding index, it contains the order that they appear in the code
+
+    Returns:
+        List[str]: A list of translated binary lines
+    """
     result_bin_code = []
     for assembly_line in assembly_lines:
         instruction_in_binary = []

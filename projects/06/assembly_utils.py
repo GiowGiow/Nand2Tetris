@@ -1,3 +1,4 @@
+"""Utility functions for the assembler."""
 import argparse
 from pathlib import Path
 from typing import Dict, List, Set, TextIO, Tuple
@@ -12,6 +13,10 @@ from a_instruction import (
 
 
 def write_to_output(file_name: str, bin_code: List[str]) -> None:
+    """Write the binary code to a file.
+
+    The file is written with the same name as the input file but ending suffix of .hack.
+    """
     hack_file_name = Path(file_name).with_suffix(".hack")
     print(f"Output file: {hack_file_name}")
     with open(hack_file_name, "w") as f:
@@ -20,6 +25,7 @@ def write_to_output(file_name: str, bin_code: List[str]) -> None:
 
 
 def parse_asm_file_from_argument() -> str:
+    """Parse the assembly file name from the command line arguments."""
     parser = argparse.ArgumentParser(
         prog="Hack Assembler",
         description="Converts Hack assembly code into binary form",
@@ -33,8 +39,11 @@ def parse_asm_file_from_argument() -> str:
 
 
 def read_assembly_file(f: TextIO) -> List[str]:
-    """Ignore commented and empty lines in the string lines read
-    from the assembly file"""
+    """Read the assembly file and return a list of lines.
+
+    Ignores commented and empty lines and only returns lines of code containing
+    assembly.
+    """
     file_lines = []
     for line in f.readlines():
         line = line.strip()
@@ -48,9 +57,12 @@ def read_assembly_file(f: TextIO) -> List[str]:
 def get_labels_and_variables(
     assembly_lines: List[str],
 ) -> Tuple[Set[str], Dict[str, int], Dict[str, int]]:
-    """Identify if the symbols in the code are Labels or variables
-    returning their respective index in the end. Their index are used
-    to correctly address their memory locations afterwards"""
+    """Get all labels and variables in the assembly code.
+
+    Identify if the symbols in the code are labels or variables, returning their
+    respective index in the end. This is needed to correctly address their memory
+    locations afterward.
+    """
     labels, variables = [], []
     label_to_index = {}
 
@@ -78,12 +90,12 @@ def get_labels_and_variables(
 
 
 def calculate_label_offset(labels: List, index: int) -> int:
-    """Calculate label - offset of deleted labels"""
+    """Calculate label - offset of deleted labels."""
     return index - (len(labels) - 1)
 
 
 def generate_var_to_index(variables: List[str]) -> Dict[str, int]:
-    """Create a map from variable to its index"""
+    """Create a map from variable to its index."""
     var_to_index = {}
     for index, var in enumerate(variables):
         var_to_index[var] = index
@@ -91,10 +103,10 @@ def generate_var_to_index(variables: List[str]) -> Dict[str, int]:
 
 
 def get_variables(all_symbols: List[str], labels_set: Set[str]) -> List[str]:
-    """Separate variables from labels,
-    ignores repeated variable symbols
-    and returns the variables in the correct order"""
+    """Return a list of non-repeated variables.
 
+    The variables are returned in the correct order of their appearance in the code.
+    """
     seen_variables = set()
     variables = []
 
