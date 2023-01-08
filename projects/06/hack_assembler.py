@@ -55,7 +55,7 @@ if __name__ == "__main__":
     file_lines = []
 
     print("Loading File")
-    with open(file_name, "r") as file:
+    with open(file_name) as file:
         file_lines = read_assembly_file(file)
 
     labels, var_to_index, label_to_index = get_labels_and_variables(file_lines)

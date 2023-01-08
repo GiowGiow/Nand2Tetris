@@ -54,7 +54,7 @@ def generate_A_instruction_in_binary(
 
 def convert_int_to_15_bit_bin_str(number: int) -> str:
     """Convert an integer to a 15 bit binary string."""
-    return "{0:015b}".format(number)
+    return "{:015b}".format(number)
 
 
 def is_numeric_address(address: str) -> bool:
