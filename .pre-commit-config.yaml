@@ -8,12 +8,6 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
-  - repo: https://github.com/PyCQA/bandit
-    rev: "1.7.4"
-    hooks:
-      - id: bandit
-        name: checking for vulnerabilities (Bandit)
-        description: Tool designed to find common security issues in Python code
   - repo: https://github.com/psf/black
     rev: 22.12.0
     hooks:
@@ -26,6 +20,18 @@ repos:
       - id: isort
         name: "sorting imports (Isort)"
         description: A Python utility/library to sort imports
+  - repo: https://github.com/PyCQA/docformatter
+    rev: v1.5.1
+    hooks:
+      - id: docformatter
+        name: "formatting docstrings (Docformatter)"
+        description: Formats docstrings to follow PEP 257
+  - repo: https://github.com/pycqa/pydocstyle
+    rev: 6.2.2
+    hooks:
+      - id: pydocstyle
+        name: "style checking docstring (Pydocstyle)"
+        description: Docstring style checker
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
     hooks:
@@ -40,18 +46,12 @@ repos:
         name: "static Type checking (Mypy)"
         description: Optional static typing for Python
         additional_dependencies: [pydantic]
-  - repo: https://github.com/PyCQA/docformatter
-    rev: v1.5.1
+  - repo: https://github.com/PyCQA/bandit
+    rev: "1.7.4"
     hooks:
-      - id: docformatter
-        name: "formatting docstrings (Docformatter)"
-        description: Formats docstrings to follow PEP 257
-  - repo: https://github.com/pycqa/pydocstyle
-    rev: 6.2.2
-    hooks:
-      - id: pydocstyle
-        name: "style checking docstring (Pydocstyle)"
-        description: Docstring style checker
+      - id: bandit
+        name: checking for vulnerabilities (Bandit)
+        description: Tool designed to find common security issues in Python code
   - repo: https://github.com/compilerla/conventional-pre-commit
     rev: v2.1.1
     hooks:
