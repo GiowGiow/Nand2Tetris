@@ -14,6 +14,18 @@ repos:
       - id: bandit
         name: checking for vulnerabilities (Bandit)
         description: Tool designed to find common security issues in Python code
+  - repo: https://github.com/psf/black
+    rev: 22.12.0
+    hooks:
+      - id: black
+        name: "formatting code (Black)"
+        description: Uncompromising Python code formatter
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.11.4
+    hooks:
+      - id: isort
+        name: "sorting imports (Isort)"
+        description: A Python utility/library to sort imports
   - repo: https://github.com/PyCQA/flake8
     rev: 6.0.0
     hooks:
@@ -21,12 +33,6 @@ repos:
         args: ["--config=setup.cfg"]
         name: "static checking for errors, style and complexity (Flake8)"
         description: Errors(pyflakes) & Style Linter(pycodestyle), Cyclomatic Complexity(mccabe)
-  - repo: https://github.com/psf/black
-    rev: 22.12.0
-    hooks:
-      - id: black
-        name: "formatting code (Black)"
-        description: Uncompromising Python code formatter
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v0.991
     hooks:
@@ -34,12 +40,6 @@ repos:
         name: "static Type checking (Mypy)"
         description: Optional static typing for Python
         additional_dependencies: [pydantic]
-  - repo: https://github.com/PyCQA/isort
-    rev: 5.11.4
-    hooks:
-      - id: isort
-        name: "sorting imports (Isort)"
-        description: A Python utility/library to sort imports
   - repo: https://github.com/PyCQA/docformatter
     rev: v1.5.1
     hooks:
