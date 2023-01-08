@@ -57,4 +57,4 @@ repos:
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]
-        description: Commit message checker
+        description: Checking for conventional commit message (conventional-pre-commit)
